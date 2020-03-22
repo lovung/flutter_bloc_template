@@ -1,7 +1,7 @@
-import 'package:blocdemo/base/bloc_event_state.dart';
-import 'package:blocdemo/sample/sample_event.dart';
-import 'package:blocdemo/sample/sample_state.dart';
-import 'package:blocdemo/sample/sample_use_case.dart';
+import '../base/bloc_event_state.dart';
+import 'sample_event.dart';
+import 'sample_state.dart';
+import 'sample_use_case.dart';
 
 class SampleBloc extends BlocEventStateBase<SampleEvent, SampleState> {
   SampleIncreaseUseCase _increaseUseCase = SampleIncreaseUseCase();

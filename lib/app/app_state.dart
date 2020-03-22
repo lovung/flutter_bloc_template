@@ -1,4 +1,4 @@
-import 'package:blocdemo/base/bloc_event_state.dart';
+import '../base/bloc_event_state.dart';
 
 const NoError = null;
 const AcceptableTimeoutDuration = Duration(seconds: 5);
@@ -16,6 +16,7 @@ class AppState extends BlocState {
 
   bool get done => state == StateEnum.success || state == StateEnum.error;
   bool get isError => state == StateEnum.error;
+  bool get isBusy => state == StateEnum.loading;
 
   AppState(this.state, [this.error = NoError]) : assert(state != null);
 }

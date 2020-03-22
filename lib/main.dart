@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:blocdemo/base/bloc_event_state_builder.dart';
-import 'package:blocdemo/sample/sample_bloc.dart';
-import 'package:blocdemo/sample/sample_event.dart';
-import 'package:blocdemo/sample/sample_state.dart';
+
+import 'sample/sample_view.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,60 +25,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  SampleBloc bloc;
-
-  @override
-  void initState() {
-    super.initState();
-    bloc = SampleBloc();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Sample page"),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Center(
-            child: BlocEventStateBuilder<SampleEvent, SampleState>(
-              bloc: bloc,
-              initialEvent: SampleEventAsIncrease(),
-              builder: (BuildContext context, SampleState state) {
-                if (state.done) {
-                  return !state.isError
-                      ? Text("${state.counter}", style: TextStyle(fontSize: 30))
-                      : Text("${state.error}", style: TextStyle(fontSize: 30));
-                } else {
-                  return CircularProgressIndicator();
-                }
-              },
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              FlatButton.icon(
-                onPressed: () => bloc.emitEvent(SampleEventAsIncrease()),
-                icon: Icon(Icons.add),
-                label: Text("Add"),
-              ),
-              FlatButton.icon(
-                onPressed: () => bloc.emitEvent(SampleEventAsDecrease()),
-                icon: Icon(Icons.delete),
-                label: Text("Remove"),
-              ),
-            ],
-          )
-        ],
-      ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () => bloc.emitEvent(SampleEventAsIncrease()),
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: SampleWidgetView(),
     );
   }
 }

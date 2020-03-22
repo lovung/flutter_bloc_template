@@ -1,4 +1,4 @@
-import 'package:blocdemo/base/bloc_event_state.dart';
+import '../base/bloc_event_state.dart';
 
 abstract class SampleEvent extends BlocEvent {}
 

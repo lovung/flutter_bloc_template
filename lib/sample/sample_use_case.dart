@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:blocdemo/app/app_use_case.dart';
+import '../app/app_use_case.dart';
 
 Future<int> increase(int c) async {
   await Future.delayed(Duration(seconds: 1));

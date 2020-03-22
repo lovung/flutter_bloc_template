@@ -1,4 +1,4 @@
-import 'package:blocdemo/app/app_state.dart';
+import '../app/app_state.dart';
 
 class SampleState extends AppState {
   SampleState(
