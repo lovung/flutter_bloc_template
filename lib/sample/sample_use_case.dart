@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:blocdemo/app/use_case.dart';
+import 'package:blocdemo/app/app_use_case.dart';
 
 Future<int> increase(int c) async {
   await Future.delayed(Duration(seconds: 1));
@@ -12,7 +12,7 @@ Future<int> decrease(int c) async {
   return c - 1;
 }
 
-class SampleIncreaseUseCase implements UseCase<int, int> {
+class SampleIncreaseUseCase implements AppUseCase<int, int> {
   @override
   Future<int> execute(int params) async {
     var completer = Completer<int>();
@@ -26,7 +26,7 @@ class SampleIncreaseUseCase implements UseCase<int, int> {
   }
 }
 
-class SampleDecreaseUseCase implements UseCase<int, int> {
+class SampleDecreaseUseCase implements AppUseCase<int, int> {
   @override
   Future<int> execute(int params) async {
     var completer = Completer<int>();
