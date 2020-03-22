@@ -7,11 +7,7 @@ class SampleBloc extends BlocEventStateBase<SampleEvent, SampleState> {
   SampleIncreaseUseCase _increaseUseCase = SampleIncreaseUseCase();
   SampleDecreaseUseCase _decreaseUseCase = SampleDecreaseUseCase();
 
-  SampleBloc({BlocEvent initialEvent})
-      : super(
-          initialState: SampleState.init(),
-          initialEvent: initialEvent,
-        );
+  SampleBloc() : super(initialState: SampleState.init());
 
   @override
   Stream<SampleState> eventHandler(

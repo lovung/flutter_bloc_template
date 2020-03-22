@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:blocdemo/base/bloc_builder.dart';
+import 'package:blocdemo/base/bloc_event_state_builder.dart';
 import 'package:blocdemo/sample/sample_bloc.dart';
 import 'package:blocdemo/sample/sample_event.dart';
 import 'package:blocdemo/sample/sample_state.dart';
@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    bloc = SampleBloc(initialEvent: SampleEventAsIncrease());
+    bloc = SampleBloc();
   }
 
   @override
@@ -45,8 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Center(
-            child: BlocLazyBuilder<SampleEvent, SampleState>(
+            child: BlocEventStateBuilder<SampleEvent, SampleState>(
               bloc: bloc,
+              initialEvent: SampleEventAsIncrease(),
               builder: (BuildContext context, SampleState state) {
                 if (state.done) {
                   return !state.isError

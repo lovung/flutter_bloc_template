@@ -5,30 +5,34 @@ import 'bloc_event_state.dart';
 typedef Widget AsyncBlocEventStateBuilder<BlocState>(
     BuildContext context, BlocState state);
 
-class BlocLazyBuilder<BlocEvent, BlocState> extends StatefulWidget {
-  const BlocLazyBuilder({
+class BlocEventStateBuilder<BlocEvent, BlocState> extends StatefulWidget {
+  const BlocEventStateBuilder({
     Key key,
     @required this.builder,
     @required this.bloc,
+    this.initialEvent,
   })  : assert(builder != null),
         assert(bloc != null),
         super(key: key);
 
   final BlocEventStateBase<BlocEvent, BlocState> bloc;
   final AsyncBlocEventStateBuilder<BlocState> builder;
+  final BlocEvent initialEvent;
 
   @override
-  _BlocLazyBuilderState createState() =>
-      _BlocLazyBuilderState<BlocEvent, BlocState>();
+  _BlocEventStateBuilderState createState() =>
+      _BlocEventStateBuilderState<BlocEvent, BlocState>();
 }
 
-class _BlocLazyBuilderState<BlocEvent, BlocState>
-    extends State<BlocLazyBuilder<BlocEvent, BlocState>> {
+class _BlocEventStateBuilderState<BlocEvent, BlocState>
+    extends State<BlocEventStateBuilder<BlocEvent, BlocState>> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      widget.bloc.emitEvent(widget.bloc.initialEvent);
-    });
+    if (widget.initialEvent != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        widget.bloc.emitEvent(widget.initialEvent);
+      });
+    }
     super.initState();
   }
 

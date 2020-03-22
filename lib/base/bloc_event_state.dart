@@ -23,13 +23,9 @@ abstract class BlocEventStateBase<BlocEvent, BlocState> implements BlocBase {
   /// initialState
   final BlocState initialState;
 
-  /// Event come when ever widget ready
-  BlocEvent initialEvent;
-
   /// Constructor
   BlocEventStateBase({
     @required this.initialState,
-    this.initialEvent,
   }) {
     /// For each received event, we invoke the [eventHandler] and
     /// emit any resulting newState
