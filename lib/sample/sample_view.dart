@@ -20,6 +20,12 @@ class _SampleWidgetViewState extends State<SampleWidgetView> {
   }
 
   @override
+  void dispose() {
+    bloc?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocEventStateBuilder<SampleEvent, SampleState>(
       bloc: bloc,
