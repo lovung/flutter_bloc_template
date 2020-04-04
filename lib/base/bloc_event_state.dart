@@ -12,7 +12,8 @@ abstract class BlocEventStateBase<BlocEvent, BlocState> implements BlocBase {
   BehaviorSubject<BlocState> _stateController = BehaviorSubject<BlocState>();
 
   /// To be invoked to emit an event
-  Function(BlocEvent) get emitEvent => _eventController.sink.add;
+  Function(BlocEvent) get emitEvent =>
+      _eventController.isClosed ? () {} : _eventController.sink.add;
 
   /// Current/New state
   Stream<BlocState> get state => _stateController.stream;
@@ -32,7 +33,9 @@ abstract class BlocEventStateBase<BlocEvent, BlocState> implements BlocBase {
     _eventController.listen((BlocEvent event) {
       BlocState currentState = _stateController.value ?? initialState;
       eventHandler(event, currentState).forEach((BlocState newState) {
-        _stateController.sink.add(newState);
+        if (!_stateController.isClosed) {
+          _stateController.sink.add(newState);
+        }
       });
     });
   }
